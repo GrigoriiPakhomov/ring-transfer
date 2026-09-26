@@ -2,12 +2,14 @@ package app.service;
 
 import lombok.Getter;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * Состояние жизненного цикла симуляции.
  */
 @Getter
 public class SimulationState {
-    private volatile boolean running = true;
+    private final AtomicBoolean running = new AtomicBoolean(true);
 
     /**
      * Возвращает признак активности симуляции.
@@ -15,13 +17,13 @@ public class SimulationState {
      * @return true, если симуляция продолжается
      */
     public boolean isRunning() {
-        return running;
+        return running.get();
     }
 
     /**
      * Останавливает симуляцию.
      */
     public void stop() {
-        this.running = false;
+        running.set(false);
     }
 }

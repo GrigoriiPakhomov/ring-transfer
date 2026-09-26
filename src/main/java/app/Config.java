@@ -26,4 +26,22 @@ public class Config {
         this.transferAmount = transferAmount;
         this.initialBalance = initialBalance;
     }
+
+    /**
+     * Проверяет корректность конфигурации.
+     */
+    public void validate() {
+        if (userCount < 2) {
+            throw new IllegalArgumentException("Количество пользователей должно быть не меньше 2.");
+        }
+        if (workTimeSeconds <= 0) {
+            throw new IllegalArgumentException("Время работы должно быть больше 0.");
+        }
+        if (transferAmount <= 0) {
+            throw new IllegalArgumentException("Сумма перевода должна быть больше 0.");
+        }
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException("Начальный баланс не может быть отрицательным.");
+        }
+    }
 }
